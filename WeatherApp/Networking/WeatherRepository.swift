@@ -18,7 +18,7 @@ class WeatherRepository: WeatherRepositoryProtocol {
         self.apiClient = apiClient
     }
     
-    func getCurrentWeather() async throws -> <<error type>> {
+    func getCurrentWeather() async throws -> CurrentWeatherResponse {
         do {
             let currentWeather = try await apiClient.perform(request: CurrentWeatherRequest())
             return currentWeather
