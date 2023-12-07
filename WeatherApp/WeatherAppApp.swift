@@ -11,7 +11,8 @@ import SwiftUI
 struct WeatherAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            CurrentWeatherView(viewModel: CurrentWeatherViewModel(downloader: WeatherRepository(apiClient: DefaultAPIClient())))
+            CurrentWeatherTabView(viewModel: CurrentWeatherTabViewModel())
         }
     }
 }
