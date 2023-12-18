@@ -12,5 +12,11 @@ enum TabState: Int, CaseIterable {
 }
 
 final class CurrentWeatherTabViewModel: ObservableObject {
+    let viewModelFactory: ViewModelFactoryProtocol
+    
+    init(viewModelFactory: ViewModelFactoryProtocol) {
+        self.viewModelFactory = viewModelFactory
+    }
+    
     @Published var selectedTab: TabState = .weather
 }

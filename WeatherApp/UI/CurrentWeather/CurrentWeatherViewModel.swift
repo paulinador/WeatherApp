@@ -20,11 +20,10 @@ class CurrentWeatherViewModel: ObservableObject {
     @Published var latitude = 0.0
     @Published var temp = 0.0
     @Published var feelsLike = 0.0
-//    @Published var tempMin = 0.0
-//    @Published var tempMax = 0.0
-    @Published var pressure = 0
+    @Published var tempMin = 0.0
+    @Published var tempMax = 0.0
     @Published var wind = 0.0
-//    @Published var humidity = 0
+    @Published var humidity = 0
     @Published var weather: [WeatherResponse] = []
     
     @Published var state: State = .loading
@@ -47,8 +46,10 @@ class CurrentWeatherViewModel: ObservableObject {
             self.temp = result.main.temp
             self.feelsLike = result.main.feelsLike
             self.wind = result.wind.speed
-            self.pressure = result.main.pressure
+            self.humidity = result.main.humidity
             self.weather = result.weather
+            self.tempMin = result.main.tempMin
+            self.tempMax = result.main.tempMax
             
             state = .success
         } catch {

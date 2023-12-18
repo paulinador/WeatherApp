@@ -12,14 +12,14 @@ struct CurrentWeatherTabView: View {
     
     var body: some View {
         TabView(selection: $viewModel.selectedTab) {
-            CurrentWeatherView(viewModel: CurrentWeatherViewModel(downloader: WeatherRepository(apiClient: DefaultAPIClient()), favoriteCityRepository: FavoriteCityRepository()))
+            CurrentWeatherView(viewModel: viewModel.viewModelFactory.makeCurrentWeatherViewModel())
                 .tabItem {
                     Image(systemName: "sun.max")
                     Text("Weather")
                 }
                 .tag(TabState.weather)
             
-            FavoriteCitiesView(viewModel: FavoriteCitiesViewModel(favoriteCityRepository: FavoriteCityRepository()))
+            FavoriteCitiesView(viewModel: viewModel.viewModelFactory.makeFavoriteCitiesViewModel())
                 .tabItem {
                     Image(systemName: "star")
                     Text("Favorites")

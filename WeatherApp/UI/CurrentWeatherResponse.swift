@@ -13,6 +13,7 @@ struct CurrentWeatherResponse: Codable, Hashable {
     let main: MainResponse
     let wind: WindResponse
     let dt: Date
+    let id: Int
     let name: String
 }
 
