@@ -27,7 +27,7 @@ class ViewModelFactory: ViewModelFactoryProtocol {
     }
     
     func makeFavoriteCitiesViewModel() -> FavoriteCitiesViewModel {
-        FavoriteCitiesViewModel(favoriteCityRepository: favoriteCityRepository)
+        FavoriteCitiesViewModel(favoriteCityRepository: favoriteCityRepository, downloader: weatherRepository)
     }
     
 }

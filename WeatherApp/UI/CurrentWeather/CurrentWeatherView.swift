@@ -21,10 +21,11 @@ struct CurrentWeatherView: View {
                 makeErrorStateView()
             }
         }
-        .navigationTitle("Weather Forecast")
-        .task {
-            await viewModel.fetchData()
+        .searchable(text: $viewModel.searchName)
+        .onSubmit(of: .search) {
+            viewModel.onSearchTap()
         }
+        .navigationTitle("Weather Forecast")
     }
     
     @ViewBuilder private func makeSuccessStateView() -> some View {
@@ -123,16 +124,6 @@ struct CurrentWeatherView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 20))
 
                     Spacer()
-                }
-            }
-            .preferredColorScheme(.light)
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink {
-                    SearchView(viewModel: SearchViewModel())
-                } label: {
-                    Image(systemName: "magnifyingglass.circle")
                 }
             }
         }

@@ -28,6 +28,8 @@ class CurrentWeatherViewModel: ObservableObject {
     
     @Published var state: State = .loading
     
+    @Published var searchName = ""
+    
     private let localDownloader: WeatherRepositoryProtocol
     private let favoriteCityRepository: FavoriteCityRepositoryProtocol
     
@@ -35,20 +37,24 @@ class CurrentWeatherViewModel: ObservableObject {
         self.favoriteCityRepository = favoriteCityRepository
         self.localDownloader = downloader
        
+        Task {
+            await fetchData()
+        }
     }
     
     @MainActor
-    func fetchData() async {
+    func fetchData(cityName: String = "Krakow") async {
+        
         do {
-            let result = try await localDownloader.getCurrentWeather()
-            self.name = result.name
-            self.temp = result.main.temp
-            self.feelsLike = result.main.feelsLike
-            self.wind = result.wind.speed
-            self.humidity = result.main.humidity
-            self.weather = result.weather
-            self.tempMin = result.main.tempMin
-            self.tempMax = result.main.tempMax
+            let result = try await localDownloader.getCurrentWeather(cityName: cityName)
+            name = result.name
+            temp = result.main.temp
+            feelsLike = result.main.feelsLike
+            wind = result.wind.speed
+            humidity = result.main.humidity
+            weather = result.weather
+            tempMin = result.main.tempMin
+            tempMax = result.main.tempMax
             
             state = .success
         } catch {
@@ -66,5 +72,10 @@ class CurrentWeatherViewModel: ObservableObject {
         favoriteCityRepository.isCityFavorite(cityName: name)
     }
     
+    func onSearchTap() {
+        Task {
+            await fetchData(cityName: searchName)
+        }
+    }
 }
 

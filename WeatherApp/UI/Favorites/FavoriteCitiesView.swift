@@ -15,8 +15,8 @@ struct FavoriteCitiesView: View {
             List {
                 Section {
                     
-                    ForEach(viewModel.favoriteCity, id: \.self) { favorite in
-                        FavoriteRow(city: favorite)
+                    ForEach(viewModel.favoriteWeathers, id: \.self) { favorite in
+                        FavoriteRow(weather: favorite)
                     }
                     .onDelete(perform: viewModel.removeFavoriteItem)
                     .listRowSeparator(.hidden)
@@ -35,8 +35,8 @@ struct FavoriteCitiesView: View {
             }
             .scrollContentBackground(.hidden)
             .background(Color(red: 0 / 255, green: 53 / 255, blue: 102 / 255))
-            .onAppear {
-                viewModel.loadCities()
+            .task {
+                await viewModel.loadCities()
             }
         }
     }

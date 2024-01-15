@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct FavoriteRow: View {
-    let city: String
+    let weather: FavoriteWeather
     
     var body: some View {
         HStack {
-            Text(city)
+            Text(weather.name)
                 .font(.title3)
                 .fontWeight(.light)
                 .foregroundColor(.black)
             
             Spacer()
             
-            AsyncImage(url: URL(string: "https://openweathermap.org/img/wn/13d.png"))
+            AsyncImage(url: URL(string: weather.iconUrl))
 
-            Text("-10ºC")
+            Text("\(weather.temp)")
                 .font(.title3)
                 .fontWeight(.light)
                 .foregroundColor(.black)
@@ -29,8 +29,4 @@ struct FavoriteRow: View {
     }
 }
 
-struct FavoriteRow_Previews: PreviewProvider {
-    static var previews: some View {
-        FavoriteRow(city: "Warszawa")
-    }
-}
+
