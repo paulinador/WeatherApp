@@ -13,7 +13,7 @@ struct CurrentWeatherRequest: APIRequest {
     var path: String = "/data/2.5/weather"
     
     var queries: [URLQueryItem]? {
-        [URLQueryItem(name: "q", value: "Warsaw"),
+        [URLQueryItem(name: "q", value: "Kraków"),
          URLQueryItem(name: "appid", value: "47bbb439c12753bbe3e7d76461c0dc3c"),
          URLQueryItem(name: "units", value: "metric")
         ]

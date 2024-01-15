@@ -11,16 +11,33 @@ struct FavoriteCitiesView: View {
     @StateObject var viewModel: FavoriteCitiesViewModel
     
     var body: some View {
-        List {
-            ForEach(viewModel.favoriteCity, id: \.self) { favorite in
-                HStack {
-                    Text(favorite)
+        NavigationView {
+            List {
+                Section {
+                    
+                    ForEach(viewModel.favoriteCity, id: \.self) { favorite in
+                        FavoriteRow(city: favorite)
+                    }
+                    .onDelete(perform: viewModel.removeFavoriteItem)
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(
+                        Capsule()
+                            .fill(Color(white: 1, opacity: 0.8))
+                            .padding(.vertical, 5)
+                    )
+                } header: {
+                    Text("Favorite Cities")
+                        .font(.title)
+                        .fontWeight(.light)
+                        .foregroundColor(.white)
+                        .padding(.vertical, 5)
                 }
             }
-            .onDelete(perform: viewModel.removeFavoriteItem)
-        }
-        .onAppear {
-            viewModel.loadCities()
+            .scrollContentBackground(.hidden)
+            .background(Color(red: 0 / 255, green: 53 / 255, blue: 102 / 255))
+            .onAppear {
+                viewModel.loadCities()
+            }
         }
     }
 }

@@ -30,7 +30,6 @@ class CurrentWeatherViewModel: ObservableObject {
     
     private let localDownloader: WeatherRepositoryProtocol
     private let favoriteCityRepository: FavoriteCityRepositoryProtocol
-    let cityName: String = "Warszawa"
     
     init(downloader: WeatherRepositoryProtocol, favoriteCityRepository: FavoriteCityRepositoryProtocol) {
         self.favoriteCityRepository = favoriteCityRepository
@@ -59,12 +58,12 @@ class CurrentWeatherViewModel: ObservableObject {
     }
     
     func addFavorites() {
-        favoriteCityRepository.addFavoriteCity(cityName: cityName)
+        favoriteCityRepository.addFavoriteCity(cityName: name)
 
     }
 
     func isFavorite() -> Bool {
-        favoriteCityRepository.isCityFavorite(cityName: cityName)
+        favoriteCityRepository.isCityFavorite(cityName: name)
     }
     
 }
