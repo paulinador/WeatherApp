@@ -20,8 +20,11 @@ struct FavoriteRow: View {
             Spacer()
             
             AsyncImage(url: URL(string: weather.iconUrl))
+                .frame(width: 50, height: 50)
+                .background(.ultraThinMaterial)
+                .cornerRadius(50)
 
-            Text("\(weather.temp)")
+            Text("\(weather.temp.roundDouble())ºC")
                 .font(.title3)
                 .fontWeight(.light)
                 .foregroundColor(.black)

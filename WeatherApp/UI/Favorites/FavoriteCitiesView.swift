@@ -14,9 +14,8 @@ struct FavoriteCitiesView: View {
         NavigationView {
             List {
                 Section {
-                    
                     ForEach(viewModel.favoriteWeathers, id: \.self) { favorite in
-                        FavoriteRow(weather: favorite)
+                        makeItem(item: favorite)
                     }
                     .onDelete(perform: viewModel.removeFavoriteItem)
                     .listRowSeparator(.hidden)
@@ -26,11 +25,7 @@ struct FavoriteCitiesView: View {
                             .padding(.vertical, 5)
                     )
                 } header: {
-                    Text("Favorite Cities")
-                        .font(.title)
-                        .fontWeight(.light)
-                        .foregroundColor(.white)
-                        .padding(.vertical, 5)
+                   makeHeader()
                 }
             }
             .scrollContentBackground(.hidden)
@@ -40,10 +35,17 @@ struct FavoriteCitiesView: View {
             }
         }
     }
+    
+    @ViewBuilder private func makeHeader() -> some View {
+        Text("Favorite Cities")
+            .font(.title)
+            .fontWeight(.light)
+            .foregroundColor(.white)
+            .padding(.vertical, 5)
+    }
+    
+    @ViewBuilder private func makeItem(item: FavoriteWeather) -> some View {
+        
+        FavoriteRow(weather: item)
+    }
 }
-
-//struct FavoriteCitiesView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FavoriteCitiesView()
-//    }
-//}

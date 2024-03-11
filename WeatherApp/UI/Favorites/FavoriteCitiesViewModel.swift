@@ -14,11 +14,16 @@ struct FavoriteWeather: Identifiable, Hashable {
     
     let name: String
     let temp: Double
+    let feelsLike: Double
+    let speed: Double
+    let humidity: Int
     let icon: String
     
     var iconUrl: String {
         "https://openweathermap.org/img/wn/\(icon).png"
     }
+    
+    var isExpanded: Bool = false
 }
 
 class FavoriteCitiesViewModel: ObservableObject {
@@ -40,7 +45,7 @@ class FavoriteCitiesViewModel: ObservableObject {
         for city in favoriteCities {
             do {
                 let result = try await localDownloader.getCurrentWeather(cityName: city)
-                let favoriteWeather = FavoriteWeather(name: result.name, temp: result.main.temp, icon: result.weather.first?.icon ?? "01d")
+                let favoriteWeather = FavoriteWeather(name: result.name, temp: result.main.temp, feelsLike: result.main.feelsLike, speed: result.wind.speed, humidity: result.main.humidity, icon: result.weather.first?.icon ?? "01d")
                 localFavoriteCities.append(favoriteWeather)
             } catch {
                 print(error)

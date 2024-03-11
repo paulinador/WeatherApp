@@ -17,7 +17,8 @@ struct WeatherRow: View {
             Image(systemName: image)
                 .font(.title2)
                 .frame(width: 50, height: 50)
-                .background(Color(red: 255 / 255, green: 195 / 255, blue: 0 / 255))
+//                .background(Color(red: 255 / 255, green: 195 / 255, blue: 0 / 255))
+                .background(Color(red: 255 / 255, green: 198 / 255, blue: 0 / 255))
                 .cornerRadius(50)
                 .foregroundColor(.white)
             
