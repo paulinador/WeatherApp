@@ -11,28 +11,23 @@ struct FavoriteCitiesView: View {
     @StateObject var viewModel: FavoriteCitiesViewModel
     
     var body: some View {
-        NavigationView {
-            List {
-                Section {
-                    ForEach(viewModel.favoriteWeathers, id: \.self) { favorite in
-                        makeItem(item: favorite)
-                    }
-                    .onDelete(perform: viewModel.removeFavoriteItem)
-                    .listRowSeparator(.hidden)
-                    .listRowBackground(
-                        Capsule()
-                            .fill(Color(white: 1, opacity: 0.8))
-                            .padding(.vertical, 5)
-                    )
-                } header: {
-                   makeHeader()
+        List {
+            Section {
+                ForEach(viewModel.favoriteWeathers, id: \.self) { favorite in
+                    makeItem(item: favorite)
+                        .listRowBackground(Color(white: 0, opacity: 0.2))
                 }
+                .onDelete(perform: viewModel.removeFavoriteItem)
+                .listRowSeparator(.hidden)
+            } header: {
+                makeHeader()
             }
-            .scrollContentBackground(.hidden)
-            .background(Color(red: 0 / 255, green: 53 / 255, blue: 102 / 255))
-            .task {
-                await viewModel.loadCities()
-            }
+        }
+
+        .scrollContentBackground(.hidden)
+        .background(Color(red: 0 / 255, green: 53 / 255, blue: 102 / 255))
+        .task {
+            await viewModel.loadCities()
         }
     }
     
@@ -45,7 +40,31 @@ struct FavoriteCitiesView: View {
     }
     
     @ViewBuilder private func makeItem(item: FavoriteWeather) -> some View {
-        
-        FavoriteRow(weather: item)
+        ItemRowView(item: item)
+    }
+}
+
+struct ItemRowView: View {
+    @State private var isWeatherExpanded: Bool = false
+    let item: FavoriteWeather
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            FavoriteRow(weather: item)
+            if isWeatherExpanded {
+                FavoriteDetails(weather: item)
+                    .transition(.opacity)
+                    .padding()
+            }
+        }
+        .background(RoundedRectangle(cornerRadius: 16)
+            .fill(Color(white: 1, opacity: 1.0)))
+        .animation(.linear(duration: 0.2))
+        .contentShape(Rectangle())
+        .onTapGesture {
+            withAnimation {
+                isWeatherExpanded.toggle()
+            }
+        }
     }
 }

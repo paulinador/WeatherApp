@@ -11,18 +11,18 @@ struct FavoriteDetails: View {
     let weather: FavoriteWeather
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Text("Feels like: \(weather.feelsLike.roundDouble())ºC")
                 .font(.headline)
                 .foregroundStyle(.secondary)
                 .padding(20)
             
             HStack {
-                WeatherRow(image: "wind", name: "Wind", value: (weather.speed.roundDouble()) + " m/s")
+                WeatherRow(image: "wind", name: "Wind", value: (weather.speed.roundDouble()) + " m/s", color: .gray)
                 
                 Spacer()
                 
-                WeatherRow(image: "line.3.horizontal", name: "Humidity", value: "\(weather.humidity)%")
+                WeatherRow(image: "line.3.horizontal", name: "Humidity", value: "\(weather.humidity)%", color: .gray)
 
             }
             .padding(.bottom, 20)

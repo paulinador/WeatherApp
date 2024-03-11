@@ -64,4 +64,8 @@ class FavoriteCitiesViewModel: ObservableObject {
             favoriteWeathers.remove(atOffsets: offsets)
         }
     }
+    
+    func isExpanded(for item: FavoriteWeather) -> Bool {
+        return true
+    }
 }
