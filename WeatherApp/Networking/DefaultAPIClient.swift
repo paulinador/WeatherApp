@@ -8,6 +8,12 @@
 import Foundation
 
 class DefaultAPIClient: APIClient {
+    private let session: URLSession
+
+    init(session: URLSession = .shared) {
+        self.session = session
+    }
+    
     func perform<T>(request: T) async throws -> T.ReturnType where T : APIRequest {
         var urlComponents = URLComponents(string: baseUrl)
         urlComponents?.path = request.path
@@ -20,19 +26,19 @@ class DefaultAPIClient: APIClient {
         let urlRequest = URLRequest(url: url)
         
         do {
-            let (data, _) = try await URLSession.shared.data(for: urlRequest)
+            let (data, _) = try await session.data(for: urlRequest)
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             
             guard let response = try? decoder.decode(T.ReturnType.self, from: data) else {
                 print("Error: could not decode JSON data")
-                throw APIError.invalidURL
+                throw APIError.decodingError
             }
             
             return response
             
         } catch {
-            throw APIError.invalidURL
+            throw APIError.missingData
         }
     }
     
@@ -42,4 +48,6 @@ class DefaultAPIClient: APIClient {
 
 enum APIError: Error {
     case invalidURL
+    case decodingError
+    case missingData
 }

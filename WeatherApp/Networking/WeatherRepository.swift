@@ -8,7 +8,7 @@
 import Foundation
 
 protocol WeatherRepositoryProtocol {
-    func getCurrentWeather() async throws -> CurrentWeatherResponse
+    func getCurrentWeather(cityName: String) async throws -> CurrentWeatherResponse
 }
 
 class WeatherRepository: WeatherRepositoryProtocol {
@@ -18,12 +18,7 @@ class WeatherRepository: WeatherRepositoryProtocol {
         self.apiClient = apiClient
     }
     
-    func getCurrentWeather() async throws -> CurrentWeatherResponse {
-        do {
-            let currentWeather = try await apiClient.perform(request: CurrentWeatherRequest())
-            return currentWeather
-        } catch {
-            throw error
-        }
+    func getCurrentWeather(cityName: String) async throws -> CurrentWeatherResponse {
+        try await apiClient.perform(request: CurrentWeatherRequest(cityName: cityName))
     }
 }

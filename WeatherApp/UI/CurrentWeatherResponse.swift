@@ -7,28 +7,29 @@
 
 import Foundation
 
-struct CurrentWeatherResponse: Codable {
+struct CurrentWeatherResponse: Codable, Hashable {
     let coord: CoordinatesResponse
     let weather: [WeatherResponse]
     let main: MainResponse
     let wind: WindResponse
     let dt: Date
+    let id: Int
     let name: String
 }
 
-struct CoordinatesResponse: Codable {
+struct CoordinatesResponse: Codable, Hashable {
     let lon: Double
     let lat: Double
 }
 
-struct WeatherResponse: Codable {
+struct WeatherResponse: Codable, Hashable {
     let id: Int
     let main: String
     let description: String
     let icon: String
 }
 
-struct MainResponse: Codable {
+struct MainResponse: Codable, Hashable {
     let temp: Double
     let feelsLike: Double
     let tempMin: Double
@@ -37,6 +38,6 @@ struct MainResponse: Codable {
     let humidity: Int
 }
 
-struct WindResponse: Codable {
+struct WindResponse: Codable, Hashable {
     let speed: Double
 }

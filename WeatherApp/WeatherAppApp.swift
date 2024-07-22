@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct WeatherAppApp: App {
+    private let viewModelFactory: ViewModelFactoryProtocol = ViewModelFactory(weatherRepository: WeatherRepository(apiClient: DefaultAPIClient()), favoriteCityRepository: FavoriteCityRepository())
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CurrentWeatherTabView(viewModel: CurrentWeatherTabViewModel(viewModelFactory: viewModelFactory))
         }
     }
 }
