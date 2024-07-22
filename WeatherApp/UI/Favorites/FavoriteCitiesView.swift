@@ -16,6 +16,7 @@ struct FavoriteCitiesView: View {
                 ForEach(viewModel.favoriteWeathers, id: \.self) { favorite in
                     makeItem(item: favorite)
                         .listRowBackground(Color(white: 0, opacity: 0.2))
+                        .padding(2)
                 }
                 .onDelete(perform: viewModel.removeFavoriteItem)
                 .listRowSeparator(.hidden)
@@ -23,9 +24,8 @@ struct FavoriteCitiesView: View {
                 makeHeader()
             }
         }
-
         .scrollContentBackground(.hidden)
-        .background(Color(red: 0 / 255, green: 53 / 255, blue: 102 / 255))
+        .background(Color(red: 21 / 255, green: 101 / 255, blue: 192 / 255))
         .task {
             await viewModel.loadCities()
         }
@@ -59,10 +59,8 @@ struct ItemRowView: View {
         }
         .background(RoundedRectangle(cornerRadius: 16)
             .fill(Color(white: 1, opacity: 1.0)))
-        .animation(.linear(duration: 0.2))
-        .contentShape(Rectangle())
         .onTapGesture {
-            withAnimation {
+            withAnimation(.linear(duration: 0.3)) {
                 isWeatherExpanded.toggle()
             }
         }

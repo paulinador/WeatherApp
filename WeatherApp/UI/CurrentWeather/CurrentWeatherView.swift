@@ -35,8 +35,18 @@ struct CurrentWeatherView: View {
                                         Color(red: 144 / 255, green: 202 / 255, blue: 249 / 255)
                                        ], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
-            
+                
                 VStack {
+//                    Another solution:
+//                    TextField("Enter city name", text: $viewModel.searchName) {
+//                        Task {
+//                            await viewModel.searchCity()
+//                        }
+//                    }
+//                    .font(.title)
+//                    .foregroundStyle(.black)
+//                    .padding()
+                    
                     
                     Text(viewModel.name)
                         .font(.largeTitle)

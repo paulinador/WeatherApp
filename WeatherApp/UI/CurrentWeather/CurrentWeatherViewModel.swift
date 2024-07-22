@@ -77,5 +77,12 @@ class CurrentWeatherViewModel: ObservableObject {
             await fetchData(cityName: searchName)
         }
     }
+    
+//    Another solution:
+//    func searchCity() async {
+//        if let city = self.searchName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
+//            await fetchData(cityName: city)
+//        }
+//    }
 }
 

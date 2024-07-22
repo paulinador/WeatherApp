@@ -93,8 +93,8 @@
 		7C2B3BCD2AF8F03700B747F6 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
-				7C458DD42AFD5CC500DF6F04 /* Networking */,
 				7C2B3BCE2AF8F03700B747F6 /* WeatherAppApp.swift */,
+				7C458DD42AFD5CC500DF6F04 /* Networking */,
 				7C5AC76B2B21D1AC0094CBF2 /* UI */,
 				7C2B3BD22AF8F03900B747F6 /* Assets.xcassets */,
 				7C2B3BD42AF8F03900B747F6 /* Preview Content */,
